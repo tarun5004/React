@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+
+/* WHY: Tailwind v4 mein darkMode: "class" config nahi hota, instead CSS @variant use hota hai. Iske bina dark mode kaam nahi karega. */
