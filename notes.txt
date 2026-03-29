@@ -1,0 +1,21 @@
+1. setError(null)
+Tum mostly sahi direction me ho. Point ye hai:
+
+old error UI me bana rahega
+new request success bhi ho jaye, phir bhi previous error visible reh sakta hai
+Ye console clear karne ke liye nahi hai. Ye state reset karne ke liye hai.
+
+
+
+2. results[0] vs results?.[0]
+Yahan important concept hai:
+
+results[0]:
+Agar results undefined hua, app crash karega
+
+results?.[0]:
+Agar results undefined/null hua, expression safely undefined return karega
+
+
+encodeurlcomponent - "new delhi " ko url mai safely bjena hai ye sapce or special charecyters url-safe format mai covert ho jaate hai real world maijaruri hai ye 
+
