@@ -1,9 +1,10 @@
 import React from 'react'
+import ProductCard from './ProductCart'
 
 const Home = () => {
   return (
-    <div>
-        <h1> This is Home Page </h1>
+    <div className='h-full'>
+        <ProductCard />
     </div>
   )
 }
