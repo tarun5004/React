@@ -6,7 +6,7 @@ import CartStore from '../context/CartContext'
 const ProductPage = () => {
   const { id } = useParams()
   const [product, setProduct] = useState(null)
-  const {setCartItem} = useContext(CartStore)
+  const {setCartItem, CartItem} = useContext(CartStore)
 
   useEffect(() => {
     const fetchSingleProduct = async () => {
@@ -21,10 +21,32 @@ const ProductPage = () => {
     fetchSingleProduct()
   }, [id])
 
+
+    const cartProduct = CartItem.find((item) => item.id === product?.id)
+  const quantity = cartProduct ? cartProduct.quantity : 0
+
   //add to cart handler
   const handleAddToCart = () => {
     setCartItem((prev) => [...prev, { ...product, quantity: 1 }])
+    alert('Product added to cart')
   }
+  
+// handle increse quantity
+const handleIncreseQuantity = () => {
+  setCartItem((prev) =>
+    prev.map((item) => 
+    item.id === product.id ? { ...item, quantity: item.quantity + 1} : item))
+}
+
+// handle decrease quantity
+const handleDecreaseQuantity = () => {
+  setCartItem((prev) => prev.map((item) =>
+    item.id === product.id ? { ...item, quantity: item.quantity - 1}
+    : item)
+  .filter((item) => item.quantity > 0)
+  )
+}
+
 
   if (!product) {
     return (
@@ -59,13 +81,16 @@ const ProductPage = () => {
           </div>
 
           <div className="mt-6 flex gap-3">
-            <button
-              onClick={handleAddToCart}
-              alert
-              className="flex-1 rounded-2xl bg-amber-400 px-4 py-3 font-bold text-slate-900 transition duration-150 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-lg active:translate-y-0 active:scale-[0.99]"
+            {quantity ===0? (
+              <button
+                onClick={handleAddToCart}
+                className="flex-1 rounded-2xl bg-amber-400 px-4 py-3 font-bold text-slate-900 transition duration-150 hover:-translate-y-0.5 hover:bg-amber-300 hover:shadow-lg active:translate-y-0 active:scale-[0.99]"
             >
               Add to Cart
             </button>
+            ) :( 
+              div
+  )}
             <button className="flex-1 rounded-2xl bg-orange-500 px-4 py-3 font-bold text-white">
               Buy Now
             </button>
@@ -128,3 +153,4 @@ const ProductPage = () => {
 }
 
 export default ProductPage
+//Spawn a subagent to explore this repo.
